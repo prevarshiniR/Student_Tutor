@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const Form = ({ formType = "login" }) => {
+export const Form = ({ onsubmit, formType = "login" }) => {
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -9,9 +9,9 @@ export const Form = ({ formType = "login" }) => {
     mobile: "",
   });
 
-  const onsubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted", formData);
+    onsubmit(formData);
   };
 
   const handleChange = (e) => {
@@ -25,7 +25,10 @@ export const Form = ({ formType = "login" }) => {
 
   return (
     <div className="m-10">
-      <form onSubmit={onsubmit} className="flex flex-col w-half mt-10">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col w-half mt-10"
+      >
         {formType === "signup" && (
           <div className="flex flex-col">
             <label className="mb-2.5 text-base" htmlFor="firstname">
